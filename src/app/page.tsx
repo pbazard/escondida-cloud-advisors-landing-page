@@ -1,262 +1,431 @@
+// app/page.tsx
 import Link from "next/link";
-import Image from "next/image";
 
-export default function Home() {
+const CALENDLY_URL = "https://calendly.com/your-calendly-link/aws-audit"; // à remplacer
+const CONTACT_EMAIL = "contact@escondidacloudadvisors.com"; // à remplacer
+
+export default function HomePage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-indigo-50/30 to-purple-50/20 dark:from-slate-900 dark:via-slate-900 dark:to-slate-900">
-      {/* Animated background elements */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-indigo-300/30 dark:bg-indigo-500/20 rounded-full blur-3xl animate-float"></div>
-        <div
-          className="absolute bottom-20 right-10 w-96 h-96 bg-purple-300/30 dark:bg-purple-500/20 rounded-full blur-3xl animate-float"
-          style={{ animationDelay: "2s" }}
-        ></div>
-      </div>
-
-      {/* Header */}
-      <header className="glass sticky top-0 z-50 border-b border-slate-200/50 dark:border-slate-700/50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-lg blur opacity-75"></div>
-              <Image
-                src="/images/hendrix-logo.png"
-                alt="Hendrix Logo"
-                width={40}
-                height={40}
-                className="relative rounded-lg"
-              />
+    <div className="min-h-screen bg-slate-950 text-slate-100">
+      {/* NAVBAR */}
+      <header className="border-b border-slate-800/70 bg-slate-950/80 backdrop-blur sticky top-0 z-20">
+        <div className="mx-auto max-w-6xl px-4 py-4 flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <div className="h-8 w-8 rounded-full bg-gradient-to-br from-amber-400 to-emerald-500" />
+            <div>
+              <p className="text-sm font-semibold tracking-[0.18em] uppercase text-amber-300">
+                Escondida
+              </p>
+              <p className="text-xs text-slate-400">Cloud Advisors LLC</p>
             </div>
-            <h1 className="text-2xl font-bold gradient-text">Hendrix</h1>
           </div>
-          <nav className="flex items-center gap-4">
-            <Link
-              href="/admin"
-              className="text-sm font-medium text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors px-4 py-2"
-            >
-              Admin
-            </Link>
-            <Link
-              href="/admin/setup"
-              className="text-sm font-semibold text-white bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 px-6 py-2.5 rounded-xl transition-all shadow-lg hover:shadow-xl hover:scale-105"
-            >
-              Get Started
-            </Link>
+          <nav className="hidden md:flex gap-6 text-sm text-slate-300">
+            <a href="#services" className="hover:text-amber-300">
+              Services
+            </a>
+            <a href="#quickstarts" className="hover:text-amber-300">
+              QuickStarts
+            </a>
+            <a href="#about" className="hover:text-amber-300">
+              About
+            </a>
+            <a href="#contact" className="hover:text-amber-300">
+              Contact
+            </a>
           </nav>
+          <div className="hidden md:block">
+            <Link
+              href={CALENDLY_URL}
+              className="rounded-full border border-amber-400/70 bg-amber-400/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] hover:bg-amber-400 hover:text-slate-950 transition"
+            >
+              Book a free audit
+            </Link>
+          </div>
         </div>
       </header>
 
-      {/* Main Content */}
-      <main className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        {/* Hero Section */}
-        <div className="text-center mb-20">
-          <div className="flex justify-center mb-10">
-            <div className="relative group">
-              <div className="absolute inset-0 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-3xl blur-2xl opacity-50 animate-glow group-hover:opacity-75 transition-opacity"></div>
-              <div className="relative neuro-shadow rounded-3xl p-1 bg-white dark:bg-slate-800">
-                <Image
-                  src="/images/hendrix-logo.png"
-                  alt="Hendrix Logo"
-                  width={120}
-                  height={120}
-                  className="rounded-3xl"
-                />
-              </div>
-            </div>
-          </div>
-          <h2 className="text-6xl md:text-7xl font-extrabold mb-6">
-            <span className="gradient-text">Welcome to Hendrix</span>
-          </h2>
-          <p className="text-xl md:text-2xl text-slate-600 dark:text-slate-400 max-w-3xl mx-auto mb-10 leading-relaxed">
-            A powerful Django-like admin interface built with cutting-edge
-            technologies:
-            <span className="font-semibold text-indigo-600 dark:text-indigo-400">
-              {" "}
-              Next.js 15
-            </span>
-            ,
-            <span className="font-semibold text-purple-600 dark:text-purple-400">
-              {" "}
-              React 19
-            </span>
-            , and
-            <span className="font-semibold text-pink-600 dark:text-pink-400">
-              {" "}
-              AWS Amplify
-            </span>
-          </p>
-          <div className="flex items-center justify-center gap-4 flex-wrap">
-            <Link
-              href="/admin/setup"
-              className="group relative px-8 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-bold rounded-2xl overflow-hidden transition-all hover:scale-105 hover:shadow-2xl"
-            >
-              <span className="relative z-10">Open Admin Panel</span>
-              <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-            </Link>
-            <a
-              href="https://docs.amplify.aws/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-8 py-4 glass font-bold rounded-2xl transition-all hover:scale-105 hover:shadow-xl text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-600"
-            >
-              Documentation →
-            </a>
-          </div>
-        </div>
-
-        {/* Features Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
-          <div className="glass card-hover rounded-2xl p-8 border border-slate-200/50 dark:border-slate-700/50">
-            <div className="w-16 h-16 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl flex items-center justify-center mb-6 shadow-lg">
-              <span className="text-3xl">🎨</span>
-            </div>
-            <h3 className="text-2xl font-bold text-slate-900 dark:text-slate-100 mb-3">
-              Dynamic Models
-            </h3>
-            <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
-              Create and modify database models on-the-fly without writing code.
-              Just like Django admin.
+      <main className="mx-auto max-w-6xl px-4 pb-20 pt-10 space-y-24">
+        {/* HERO */}
+        <section className="grid gap-10 lg:grid-cols-[3fr,2fr] items-center">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-amber-300 mb-4">
+              Cloud. AI. Excellence.
             </p>
-          </div>
-
-          <div className="glass card-hover rounded-2xl p-8 border border-slate-200/50 dark:border-slate-700/50">
-            <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-cyan-600 rounded-2xl flex items-center justify-center mb-6 shadow-lg">
-              <span className="text-3xl">⚡</span>
-            </div>
-            <h3 className="text-2xl font-bold text-slate-900 dark:text-slate-100 mb-3">
-              Full CRUD Operations
-            </h3>
-            <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
-              Create, read, update, and delete records with auto-generated forms
-              and validation.
-            </p>
-          </div>
-
-          <div className="glass card-hover rounded-2xl p-8 border border-slate-200/50 dark:border-slate-700/50">
-            <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-600 rounded-2xl flex items-center justify-center mb-6 shadow-lg">
-              <span className="text-3xl">🚀</span>
-            </div>
-            <h3 className="text-2xl font-bold text-slate-900 dark:text-slate-100 mb-3">
-              Modern Stack
-            </h3>
-            <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
-              Built with Next.js 15, React 19, Tailwind CSS 4, TypeScript, and
-              AWS Amplify.
-            </p>
-          </div>
-        </div>
-
-        {/* Quick Stats */}
-        <div className="relative glass rounded-3xl p-10 mb-20 overflow-hidden border border-slate-200/50 dark:border-slate-700/50">
-          <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/10 via-purple-500/10 to-pink-500/10"></div>
-          <div className="relative grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-            <div className="group">
-              <div className="text-5xl font-black mb-3 gradient-text group-hover:scale-110 transition-transform">
-                9+
-              </div>
-              <div className="text-slate-600 dark:text-slate-400 font-medium">
-                Field Types
-              </div>
-            </div>
-            <div className="group">
-              <div className="text-5xl font-black mb-3 gradient-text group-hover:scale-110 transition-transform">
-                100%
-              </div>
-              <div className="text-slate-600 dark:text-slate-400 font-medium">
-                Type Safe
-              </div>
-            </div>
-            <div className="group">
-              <div className="text-5xl font-black mb-3 gradient-text group-hover:scale-110 transition-transform">
-                ∞
-              </div>
-              <div className="text-slate-600 dark:text-slate-400 font-medium">
-                Custom Models
-              </div>
-            </div>
-            <div className="group">
-              <div className="text-5xl font-black mb-3 gradient-text group-hover:scale-110 transition-transform">
-                ⚡
-              </div>
-              <div className="text-slate-600 dark:text-slate-400 font-medium">
-                Lightning Fast
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Tech Stack */}
-        <div className="text-center">
-          <h3 className="text-3xl font-bold text-slate-900 dark:text-slate-100 mb-10">
-            Powered By
-          </h3>
-          <div className="flex flex-wrap items-center justify-center gap-4">
-            {[
-              { name: "Next.js 15", gradient: "from-black to-slate-700" },
-              { name: "React 19", gradient: "from-blue-500 to-cyan-600" },
-              { name: "TypeScript", gradient: "from-blue-600 to-blue-700" },
-              {
-                name: "Tailwind CSS 4",
-                gradient: "from-indigo-500 to-purple-600",
-              },
-              { name: "AWS Amplify", gradient: "from-orange-500 to-red-600" },
-            ].map((tech) => (
-              <div
-                key={tech.name}
-                className={`bg-gradient-to-br ${tech.gradient} text-white px-6 py-3 rounded-xl font-bold shadow-lg hover:shadow-xl hover:scale-105 transition-all`}
-              >
-                {tech.name}
-              </div>
-            ))}
-          </div>
-        </div>
-      </main>
-
-      {/* Footer */}
-      <footer className="glass border-t border-slate-200/50 dark:border-slate-700/50 mt-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-            <div className="flex items-center gap-3">
-              <div className="relative">
-                <div className="absolute inset-0 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-lg blur opacity-50"></div>
-                <Image
-                  src="/images/hendrix-logo.png"
-                  alt="Hendrix Logo"
-                  width={32}
-                  height={32}
-                  className="relative rounded-lg"
-                />
-              </div>
-              <span className="text-slate-600 dark:text-slate-400 font-medium">
-                © 2025 Hendrix. Built with ❤️ using Next.js & AWS Amplify.
+            <h1 className="text-4xl md:text-5xl font-semibold tracking-tight mb-4">
+              AWS Cloud, AI &amp; FinOps consulting
+              <span className="block text-2xl md:text-3xl text-slate-300 mt-2">
+                for modern, fast-growing companies.
               </span>
-            </div>
-            <div className="flex items-center gap-6">
+            </h1>
+            <p className="text-slate-300 max-w-xl mb-6">
+              Escondida Cloud Advisors helps U.S. SaaS and enterprise teams
+              design, migrate, secure, and optimize their AWS platforms, while
+              integrating practical AI systems that deliver real business value.
+            </p>
+            <ul className="text-sm text-slate-300 space-y-1 mb-8">
+              <li>
+                • 20–50% AWS cost reduction without rewriting your entire stack
+              </li>
+              <li>
+                • Secure, scalable architectures aligned with AWS best practices
+              </li>
+              <li>
+                • AI &amp; LLM integration (RAG, agents, automation) on top of
+                your data
+              </li>
+            </ul>
+            <div className="flex flex-wrap gap-4 items-center">
               <Link
-                href="/admin"
-                className="text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
+                href={CALENDLY_URL}
+                className="rounded-full bg-amber-400 px-6 py-3 text-sm font-semibold text-slate-950 shadow-lg shadow-amber-400/30 hover:bg-amber-300 transition"
               >
-                Admin Panel
+                Book a free 30-min AWS audit
               </Link>
               <a
-                href="https://github.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
+                href="#services"
+                className="text-sm text-slate-300 hover:text-amber-300"
               >
-                GitHub
-              </a>
-              <a
-                href="https://docs.amplify.aws/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
-              >
-                Docs
+                View services &rarr;
               </a>
             </div>
+            <p className="mt-4 text-xs text-slate-500">
+              Currently operating remotely from Europe – focused on U.S.-based
+              clients.
+            </p>
           </div>
-        </div>
+          <div className="lg:justify-self-end">
+            <div className="rounded-2xl border border-slate-800 bg-slate-900/60 p-5 shadow-xl shadow-black/40 space-y-4">
+              <p className="text-xs font-semibold uppercase tracking-[0.25em] text-slate-400">
+                Typical engagement
+              </p>
+              <ul className="space-y-3 text-sm text-slate-200">
+                <li>
+                  <span className="font-semibold text-amber-300">Week 1:</span>{" "}
+                  AWS cost &amp; architecture review.
+                </li>
+                <li>
+                  <span className="font-semibold text-amber-300">
+                    Week 2–3:
+                  </span>{" "}
+                  Optimization plan, security hardening, and automation.
+                </li>
+                <li>
+                  <span className="font-semibold text-amber-300">Week 4+:</span>{" "}
+                  Optional AI/LLM integration and ongoing advisory.
+                </li>
+              </ul>
+              <div className="mt-4 rounded-xl border border-emerald-500/40 bg-emerald-500/10 p-4 text-sm">
+                <p className="font-semibold text-emerald-300 mb-1">
+                  Outcome-focused:
+                </p>
+                <p className="text-emerald-100">
+                  Lower AWS bills, faster deployments, fewer incidents, and a
+                  clear roadmap to AI-enabled infrastructure.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* SERVICES */}
+        <section id="services" className="space-y-6">
+          <h2 className="text-2xl md:text-3xl font-semibold tracking-tight">
+            Services
+          </h2>
+          <p className="text-slate-300 max-w-3xl">
+            Escondida Cloud Advisors focuses on a small set of high-impact
+            services where deep expertise in AWS, cloud architecture, and AI
+            makes a measurable difference.
+          </p>
+          <div className="grid gap-6 md:grid-cols-2">
+            <div className="rounded-2xl border border-slate-800 bg-slate-900/60 p-6">
+              <h3 className="text-lg font-semibold mb-2">
+                AWS Architecture &amp; Modernization
+              </h3>
+              <p className="text-sm text-slate-300 mb-3">
+                Design and modernize your AWS workloads to be secure, scalable,
+                and cost-efficient.
+              </p>
+              <ul className="text-sm text-slate-300 space-y-1">
+                <li>• Serverless, containers (ECS/EKS), microservices</li>
+                <li>• Well-Architected reviews</li>
+                <li>• Observability, logging, tracing</li>
+                <li>• Multi-account governance &amp; guardrails</li>
+              </ul>
+            </div>
+
+            <div className="rounded-2xl border border-slate-800 bg-slate-900/60 p-6">
+              <h3 className="text-lg font-semibold mb-2">
+                Cloud Migrations (MAP)
+              </h3>
+              <p className="text-sm text-slate-300 mb-3">
+                Structured migrations from on-prem or other clouds into AWS,
+                aligned with the Migration Acceleration Program (MAP).
+              </p>
+              <ul className="text-sm text-slate-300 space-y-1">
+                <li>• Discovery &amp; assessment</li>
+                <li>• Rehost, replatform, refactor</li>
+                <li>• CI/CD automation</li>
+                <li>• Data &amp; workload migration</li>
+              </ul>
+            </div>
+
+            <div className="rounded-2xl border border-slate-800 bg-slate-900/60 p-6">
+              <h3 className="text-lg font-semibold mb-2">
+                AI Engineering &amp; Automation
+              </h3>
+              <p className="text-sm text-slate-300 mb-3">
+                Integrate AI where it matters: internal copilots, RAG search,
+                and automation around real business workflows.
+              </p>
+              <ul className="text-sm text-slate-300 space-y-1">
+                <li>• Bedrock / OpenAI / Anthropic integration</li>
+                <li>• RAG over internal knowledge bases</li>
+                <li>• Agents and workflow automation</li>
+                <li>• Secure, governed AI architecture</li>
+              </ul>
+            </div>
+
+            <div className="rounded-2xl border border-slate-800 bg-slate-900/60 p-6">
+              <h3 className="text-lg font-semibold mb-2">
+                FinOps &amp; Cost Optimization
+              </h3>
+              <p className="text-sm text-slate-300 mb-3">
+                Reduce AWS spend by 20–50% without compromising performance or
+                stability.
+              </p>
+              <ul className="text-sm text-slate-300 space-y-1">
+                <li>• Right-sizing &amp; workload analysis</li>
+                <li>• Savings Plans &amp; Reserved Instances</li>
+                <li>• Storage &amp; data transfer optimization</li>
+                <li>• Cost dashboards &amp; governance</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        {/* QUICKSTARTS */}
+        <section id="quickstarts" className="space-y-6">
+          <h2 className="text-2xl md:text-3xl font-semibold tracking-tight">
+            QuickStart Packages
+          </h2>
+          <p className="text-slate-300 max-w-3xl">
+            Fixed-scope, outcome-focused engagements designed to deliver value
+            fast. Ideal as a first collaboration before long-term advisory work.
+          </p>
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {/* QS 1 */}
+            <div className="rounded-2xl border border-slate-800 bg-slate-900/70 p-5 flex flex-col">
+              <h3 className="text-lg font-semibold mb-1">
+                AWS Cost Optimization (7 days)
+              </h3>
+              <p className="text-sm text-slate-300 mb-3">
+                Identify and capture 20–50% savings on your AWS bill.
+              </p>
+              <p className="text-sm font-semibold text-amber-300 mb-3">
+                3 900 USD – 7 days
+              </p>
+              <ul className="text-xs text-slate-300 space-y-1 mb-4">
+                <li>• Full AWS bill analysis</li>
+                <li>• Cost hotspots &amp; quick wins</li>
+                <li>• Savings Plans &amp; RI strategy</li>
+                <li>• Prioritized action plan</li>
+              </ul>
+              <div className="mt-auto">
+                <Link
+                  href={CALENDLY_URL}
+                  className="text-xs font-semibold text-amber-300 hover:text-amber-200"
+                >
+                  Book a free pre-assessment call &rarr;
+                </Link>
+              </div>
+            </div>
+
+            {/* QS 2 */}
+            <div className="rounded-2xl border border-slate-800 bg-slate-900/70 p-5 flex flex-col">
+              <h3 className="text-lg font-semibold mb-1">
+                Well-Architected Review (2 weeks)
+              </h3>
+              <p className="text-sm text-slate-300 mb-3">
+                Assess your workloads against AWS&apos;s Well-Architected
+                Framework.
+              </p>
+              <p className="text-sm font-semibold text-amber-300 mb-3">
+                6 500 USD – 2 weeks
+              </p>
+              <ul className="text-xs text-slate-300 space-y-1 mb-4">
+                <li>• Review across all 6 pillars</li>
+                <li>• Risk &amp; issue identification</li>
+                <li>• Remediation roadmap</li>
+                <li>• Executive summary for leadership</li>
+              </ul>
+              <div className="mt-auto">
+                <Link
+                  href={CALENDLY_URL}
+                  className="text-xs font-semibold text-amber-300 hover:text-amber-200"
+                >
+                  Discuss your workload &rarr;
+                </Link>
+              </div>
+            </div>
+
+            {/* QS 3 */}
+            <div className="rounded-2xl border border-slate-800 bg-slate-900/70 p-5 flex flex-col">
+              <h3 className="text-lg font-semibold mb-1">
+                AI Readiness Assessment (14 days)
+              </h3>
+              <p className="text-sm text-slate-300 mb-3">
+                Clarify where AI and LLMs can create real value in your context.
+              </p>
+              <p className="text-sm font-semibold text-amber-300 mb-3">
+                8 900 USD – 14 days
+              </p>
+              <ul className="text-xs text-slate-300 space-y-1 mb-4">
+                <li>• Use case discovery &amp; prioritization</li>
+                <li>• Data &amp; architecture assessment</li>
+                <li>• AI roadmap (90 days)</li>
+                <li>• Executive workshop</li>
+              </ul>
+              <div className="mt-auto">
+                <Link
+                  href={CALENDLY_URL}
+                  className="text-xs font-semibold text-amber-300 hover:text-amber-200"
+                >
+                  Explore AI for your org &rarr;
+                </Link>
+              </div>
+            </div>
+
+            {/* QS 4 */}
+            <div className="rounded-2xl border border-slate-800 bg-slate-900/70 p-5 flex flex-col">
+              <h3 className="text-lg font-semibold mb-1">
+                RAG Enterprise Search (21 days)
+              </h3>
+              <p className="text-sm text-slate-300 mb-3">
+                Deploy an internal AI search over your documents and knowledge.
+              </p>
+              <p className="text-sm font-semibold text-amber-300 mb-3">
+                14 000 USD – 21 days
+              </p>
+              <ul className="text-xs text-slate-300 space-y-1 mb-4">
+                <li>• Data ingestion &amp; vector store setup</li>
+                <li>• RAG pipeline &amp; API</li>
+                <li>• Simple internal UI</li>
+                <li>• Security &amp; access controls</li>
+              </ul>
+              <div className="mt-auto">
+                <Link
+                  href={CALENDLY_URL}
+                  className="text-xs font-semibold text-amber-300 hover:text-amber-200"
+                >
+                  Talk about your knowledge base &rarr;
+                </Link>
+              </div>
+            </div>
+
+            {/* QS 5 */}
+            <div className="rounded-2xl border border-slate-800 bg-slate-900/70 p-5 flex flex-col">
+              <h3 className="text-lg font-semibold mb-1">
+                Cloud Modernization Starter (30 days)
+              </h3>
+              <p className="text-sm text-slate-300 mb-3">
+                Modernize a key workload while putting modern AWS guardrails in
+                place.
+              </p>
+              <p className="text-sm font-semibold text-amber-300 mb-3">
+                12 000 USD – 30 days
+              </p>
+              <ul className="text-xs text-slate-300 space-y-1 mb-4">
+                <li>• CI/CD pipeline implementation</li>
+                <li>• IAM Zero Trust improvements</li>
+                <li>• Containerization or serverless design</li>
+                <li>• Observability &amp; runbooks</li>
+              </ul>
+              <div className="mt-auto">
+                <Link
+                  href={CALENDLY_URL}
+                  className="text-xs font-semibold text-amber-300 hover:text-amber-200"
+                >
+                  See if your workload is a fit &rarr;
+                </Link>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ABOUT */}
+        <section id="about" className="space-y-6">
+          <h2 className="text-2xl md:text-3xl font-semibold tracking-tight">
+            About Escondida Cloud Advisors
+          </h2>
+          <div className="grid gap-8 md:grid-cols-[3fr,2fr] items-start">
+            <div className="space-y-4 text-slate-300 text-sm">
+              <p>
+                Escondida Cloud Advisors is a boutique consulting firm focused
+                on AWS cloud architecture, AI engineering, and FinOps
+                optimization for U.S.-based SaaS and enterprise organizations.
+              </p>
+              <p>
+                Founded and led by{" "}
+                <span className="font-semibold text-slate-100">Philippe B</span>
+                , the firm brings more than a decade of experience working with
+                large enterprises on cloud, security, data, and AI
+                modernization.
+              </p>
+              <p>
+                The goal is simple: help engineering and product teams move
+                faster, with less risk and more visibility, while keeping AWS
+                costs under control and leveraging AI where it matters.
+              </p>
+              <p>
+                Escondida operates remotely with a strong focus on the U.S.
+                market, and can collaborate as an external architect, project
+                lead, or long-term advisor.
+              </p>
+            </div>
+            <div className="rounded-2xl border border-slate-800 bg-slate-900/60 p-5 text-sm text-slate-200 space-y-3">
+              <p className="text-xs font-semibold uppercase tracking-[0.25em] text-slate-400">
+                Typical outcomes
+              </p>
+              <ul className="space-y-2">
+                <li>• 20–50% reduction in AWS cost</li>
+                <li>• Fewer incidents and clearer runbooks</li>
+                <li>• Better IAM posture and governance</li>
+                <li>• AI pilots that actually reach production</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        {/* CONTACT */}
+        <section id="contact" className="space-y-4">
+          <h2 className="text-2xl md:text-3xl font-semibold tracking-tight">
+            Contact
+          </h2>
+          <p className="text-slate-300 max-w-2xl text-sm mb-4">
+            Ready to discuss your AWS platform, architecture, or AI plans? Book
+            a free 30-minute call or reach out directly.
+          </p>
+          <div className="flex flex-wrap gap-4 items-center">
+            <Link
+              href={CALENDLY_URL}
+              className="rounded-full bg-amber-400 px-6 py-3 text-sm font-semibold text-slate-950 shadow-lg shadow-amber-400/30 hover:bg-amber-300 transition"
+            >
+              Book a free AWS audit
+            </Link>
+            <a
+              href={`mailto:${CONTACT_EMAIL}`}
+              className="text-sm text-slate-300 hover:text-amber-300"
+            >
+              {CONTACT_EMAIL}
+            </a>
+          </div>
+        </section>
+      </main>
+
+      <footer className="border-t border-slate-800/70 py-6 text-center text-xs text-slate-500">
+        © {new Date().getFullYear()} Escondida Cloud Advisors LLC — Cloud. AI.
+        Excellence.
       </footer>
     </div>
   );
