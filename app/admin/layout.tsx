@@ -24,9 +24,11 @@ interface AdminLayoutProps {
 export default function AdminLayout({ children }: AdminLayoutProps) {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [darkMode, setDarkMode] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const pathname = usePathname();
 
   useEffect(() => {
+    setMounted(true);
     // Initialize from system preference if available
     const prefersDark =
       window.matchMedia &&
@@ -35,6 +37,11 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
       document.documentElement.classList.contains("dark") || prefersDark
     );
   }, []);
+
+  // Don't render until mounted to avoid SSR issues
+  if (!mounted) {
+    return null;
+  }
 
   const toggleTheme = (isSelected: boolean) => {
     setDarkMode(isSelected);

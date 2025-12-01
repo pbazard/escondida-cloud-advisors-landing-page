@@ -7,9 +7,17 @@ import { ModelDefinition, FieldDefinition } from "./types";
 class SchemaManager {
   private models: Map<string, ModelDefinition> = new Map();
   private storageKey = "admin_models";
+  private initialized = false;
 
   constructor() {
-    this.loadFromStorage();
+    // Don't load from storage in constructor to avoid SSR issues
+  }
+
+  private ensureInitialized() {
+    if (!this.initialized && typeof window !== "undefined") {
+      this.loadFromStorage();
+      this.initialized = true;
+    }
   }
 
   private loadFromStorage() {
@@ -38,6 +46,7 @@ class SchemaManager {
   createModel(
     model: Omit<ModelDefinition, "id" | "createdAt" | "updatedAt">
   ): ModelDefinition {
+    this.ensureInitialized();
     const newModel: ModelDefinition = {
       ...model,
       id: this.generateId(),
@@ -54,6 +63,7 @@ class SchemaManager {
     id: string,
     updates: Partial<ModelDefinition>
   ): ModelDefinition | null {
+    this.ensureInitialized();
     const model = this.models.get(id);
     if (!model) return null;
 
@@ -70,6 +80,7 @@ class SchemaManager {
   }
 
   deleteModel(id: string): boolean {
+    this.ensureInitialized();
     const deleted = this.models.delete(id);
     if (deleted) {
       this.saveToStorage();
@@ -78,20 +89,24 @@ class SchemaManager {
   }
 
   getModel(id: string): ModelDefinition | null {
+    this.ensureInitialized();
     return this.models.get(id) || null;
   }
 
   getModelByName(name: string): ModelDefinition | null {
+    this.ensureInitialized();
     return (
       Array.from(this.models.values()).find((m) => m.name === name) || null
     );
   }
 
   getAllModels(): ModelDefinition[] {
+    this.ensureInitialized();
     return Array.from(this.models.values());
   }
 
   addField(modelId: string, field: FieldDefinition): ModelDefinition | null {
+    this.ensureInitialized();
     const model = this.models.get(modelId);
     if (!model) return null;
 
@@ -104,6 +119,7 @@ class SchemaManager {
     fieldName: string,
     updates: Partial<FieldDefinition>
   ): ModelDefinition | null {
+    this.ensureInitialized();
     const model = this.models.get(modelId);
     if (!model) return null;
 
@@ -115,6 +131,7 @@ class SchemaManager {
   }
 
   deleteField(modelId: string, fieldName: string): ModelDefinition | null {
+    this.ensureInitialized();
     const model = this.models.get(modelId);
     if (!model) return null;
 

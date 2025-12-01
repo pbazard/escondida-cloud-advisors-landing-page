@@ -8,9 +8,17 @@ import { schemaManager } from "./schema-manager";
 class RecordManager {
   private records: Map<string, ModelRecord[]> = new Map();
   private storageKey = "admin_records";
+  private initialized = false;
 
   constructor() {
-    this.loadFromStorage();
+    // Don't load from storage in constructor to avoid SSR issues
+  }
+
+  private ensureInitialized() {
+    if (!this.initialized && typeof window !== "undefined") {
+      this.loadFromStorage();
+      this.initialized = true;
+    }
   }
 
   private loadFromStorage() {
@@ -44,6 +52,7 @@ class RecordManager {
   }
 
   createRecord(modelId: string, data: RecordData): ModelRecord {
+    this.ensureInitialized();
     const model = schemaManager.getModel(modelId);
     if (!model) {
       throw new Error(`Model ${modelId} not found`);
@@ -73,6 +82,7 @@ class RecordManager {
     recordId: string,
     data: RecordData
   ): ModelRecord | null {
+    this.ensureInitialized();
     const modelRecords = this.records.get(modelId);
     if (!modelRecords) return null;
 
@@ -96,6 +106,7 @@ class RecordManager {
   }
 
   deleteRecord(modelId: string, recordId: string): boolean {
+    this.ensureInitialized();
     const modelRecords = this.records.get(modelId);
     if (!modelRecords) return false;
 
@@ -108,6 +119,7 @@ class RecordManager {
   }
 
   getRecord(modelId: string, recordId: string): ModelRecord | null {
+    this.ensureInitialized();
     const modelRecords = this.records.get(modelId);
     if (!modelRecords) return null;
 
@@ -124,6 +136,7 @@ class RecordManager {
       filter?: Record<string, any>;
     }
   ): { records: ModelRecord[]; total: number } {
+    this.ensureInitialized();
     let modelRecords = this.records.get(modelId) || [];
     const total = modelRecords.length;
 
@@ -165,6 +178,7 @@ class RecordManager {
   }
 
   bulkDelete(modelId: string, recordIds: string[]): number {
+    this.ensureInitialized();
     const modelRecords = this.records.get(modelId);
     if (!modelRecords) return 0;
 
@@ -213,6 +227,7 @@ class RecordManager {
     totalRecords: number;
     lastUpdated: string | null;
   } {
+    this.ensureInitialized();
     const records = this.records.get(modelId) || [];
     const lastUpdated =
       records.length > 0
